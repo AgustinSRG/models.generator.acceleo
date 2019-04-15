@@ -6,8 +6,15 @@
 [comment @main/]
 
 [file (anEClassName.concat('.java'), false, 'UTF-8')]
+/// Master en ingenieria informatica
+/// Modelado avanzado de sistemas de informacion
+/// Agustin San Roman Guzman
+
 package models;
 
+/**
+ * [anEClassName/] Bean (auto-generated)
+ */
 public class [anEClassName/] {
 
 	[for (p: EAttribute | anEClass.eAllAttributes) separator('\n')]
@@ -15,10 +22,23 @@ public class [anEClassName/] {
 	[/for]
  
 	[for (p: EAttribute | anEClass.eAllAttributes) separator('\n')]
+		/**
+		 * Gets the attribute [p.name/]
+		 */
 		public [p.eAttributeType.instanceTypeName/] get[p.name.toUpperFirst()/]() {
 			return this.[p.name/];
 		}
+
+		[if p.changeable]
+			/**
+			 * Sets the attribute [p.name/]
+			 */
+			public void set[p.name.toUpperFirst()/]([p.eAttributeType.instanceTypeName/] value) {
+				this.[p.name/] = value;
+			}
+		[/if]
 	[/for]
+
 }
 
 [/file]
