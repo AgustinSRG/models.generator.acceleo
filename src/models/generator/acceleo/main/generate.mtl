@@ -16,9 +16,14 @@ package models;
  * [anEClassName/] Bean (auto-generated)
  */
 public class [anEClassName/] {
-
+	// Attributtes
 	[for (p: EAttribute | anEClass.eAllAttributes) separator('\n')]
 		private [p.eAttributeType.instanceTypeName/] [p.name/];
+	[/for]
+
+	// References
+	[for (p: EReference | anEClass.eAllReferences) separator('\n')]
+		private [p.eReferenceType.eIDAttribute.eAttributeType.instanceClassName/] [p.name/];
 	[/for]
  
 	[for (p: EAttribute | anEClass.eAllAttributes) separator('\n')]
@@ -37,6 +42,38 @@ public class [anEClassName/] {
 				this.[p.name/] = value;
 			}
 		[/if]
+
+		[if p.iD]
+			/**
+			 * Gets the ID
+			 */
+			public [p.eAttributeType.instanceTypeName/] getID() {
+				return this.[p.name/];
+			}
+
+			/**
+			 * Sets the ID
+			 */
+			public void setID([p.eAttributeType.instanceTypeName/] value) {
+				this.[p.name/] = value;
+			}
+		[/if]
+	[/for]
+
+	[for (p: EReference | anEClass.eAllReferences) separator('\n')]
+		/**
+		 * Gets the reference [p.name/]
+		 */
+		public [p.eReferenceType.eIDAttribute.eAttributeType.instanceClassName/] get[p.name.toUpperFirst()/]() {
+			return this.[p.name/];
+		}
+
+		/**
+		 * Sets the reference [p.name/]
+		 */
+		public void set[p.name.toUpperFirst()/]([p.eReferenceType.eIDAttribute.eAttributeType.instanceClassName/] value) {
+			this.[p.name/] = value;
+		}
 	[/for]
 
 }
