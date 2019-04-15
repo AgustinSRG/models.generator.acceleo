@@ -1,0 +1,26 @@
+[comment encoding = UTF-8 /]
+[module generate('http://www.eclipse.org/emf/2002/Ecore')]
+
+
+[template public generateElement(anEClass : EClass)  { anEClassName: String = anEClass.name.toUpperFirst(); } ]
+[comment @main/]
+
+[file (anEClassName.concat('.java'), false, 'UTF-8')]
+package models;
+
+public class [anEClassName/] {
+
+	[for (p: EAttribute | anEClass.eAllAttributes) separator('\n')]
+		private [p.eAttributeType.instanceTypeName/] [p.name/];
+	[/for]
+ 
+	[for (p: EAttribute | anEClass.eAllAttributes) separator('\n')]
+		public [p.eAttributeType.instanceTypeName/] get[p.name.toUpperFirst()/]() {
+			return this.[p.name/];
+		}
+	[/for]
+}
+
+[/file]
+
+[/template]
