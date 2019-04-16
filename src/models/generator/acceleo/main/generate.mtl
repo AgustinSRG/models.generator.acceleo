@@ -12,12 +12,20 @@
 
 package models;
 
+import io.ebean.Model;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
 /**
  * [anEClassName/] Bean (auto-generated)
  */
-public class [anEClassName/] {
-	// Attributtes
+@Entity
+public class [anEClassName/] extends Model {
+	// Attributes
 	[for (p: EAttribute | anEClass.eAllAttributes) separator('\n')]
+		[if p.iD]
+		@Id
+		[/if]
 		private [p.eAttributeType.instanceTypeName/] [p.name/];
 	[/for]
 
@@ -57,6 +65,11 @@ public class [anEClassName/] {
 			public void setID([p.eAttributeType.instanceTypeName/] value) {
 				this.[p.name/] = value;
 			}
+
+			// Constructor
+			public [anEClassName/]([p.eAttributeType.instanceClassName/] [p.name/]) {
+				this.[p.name/] = [p.name/];
+			}
 		[/if]
 	[/for]
 
@@ -75,7 +88,6 @@ public class [anEClassName/] {
 			this.[p.name/] = value;
 		}
 	[/for]
-
 }
 
 [/file]
